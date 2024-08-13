@@ -1,9 +1,43 @@
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+
+import { TRecipe } from "../../types/recipe";
+
+import { ScreenContainerWithScroll } from "../../components/containers/ScreenContainerWithScroll";
+import { SectionTitle } from "../../components/sectionTitle/SectionTitle";
+import { RecipeCardHorizontal } from "../../components/recipeCardHorizontal/RecipeCardHorizontal";
+
+import { AppSpacing } from "../../constants/Sizes";
+import { getFavoriteRecipes } from "../../utils/recipeFetch";
 
 export const SavedScreen = () => {
+  const [favoriteList, setFavoriteList] = useState<TRecipe[]>([]);
+
+  const getFavorites = useCallback(async () => {
+    try {
+      const recipes = await getFavoriteRecipes();
+      setFavoriteList(recipes);
+    } catch (error) {
+      console.error("Error fetching favorite recipes:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getFavorites();
+  }, [getFavorites]);
+
   return (
-    <View>
-      <Text>SavedScreen</Text>
-    </View>
+    <ScreenContainerWithScroll>
+      <View style={{ marginTop: AppSpacing.xl }} />
+
+      <SectionTitle title="Favorites" />
+      {favoriteList.length > 0 ? (
+        favoriteList.map((recipe) => (
+          <RecipeCardHorizontal key={recipe.idMeal} recipe={recipe} />
+        ))
+      ) : (
+        <Text>No favorite recipes found.</Text>
+      )}
+    </ScreenContainerWithScroll>
   );
 };

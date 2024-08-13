@@ -8,12 +8,13 @@ export enum AppSpacing {
 }
 
 export enum AppFontSizes {
-  xs = 6,
-  sm = 8,
-  md = 12,
+  xs = 10,
+  sm = 12,
+  md = 14,
   lg = 16,
-  xl = 20,
-  xxl = 24,
+  xl = 18,
+  xxl = 20,
+  xxxl = 24,
 }
 
 export enum AppRadius {

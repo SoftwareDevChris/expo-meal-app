@@ -3,7 +3,7 @@ export type TApiResponse = {
 };
 
 export type TRecipe = {
-  idMeal: number;
+  idMeal: string;
   strMeal: string;
   strDrinkAlternate: string | null;
   strCategory: string;

@@ -1,9 +1,8 @@
-import { Text, FlatList, StyleSheet } from "react-native";
-import React from "react";
+import { FlatList } from "react-native";
 
 import { CategoryItem } from "./CategoryItem";
 
-import { AppFontSizes, AppSpacing } from "../../Constants/Sizes";
+import { AppSpacing } from "../../constants/Sizes";
 
 import { CATEGORY_DATA } from "./categoryData";
 
@@ -12,7 +11,11 @@ export const CategoryList = () => {
     <>
       <FlatList
         horizontal
-        contentContainerStyle={{ gap: AppSpacing.lg }}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          gap: AppSpacing.md,
+          paddingHorizontal: AppSpacing.md - 2,
+        }}
         data={CATEGORY_DATA}
         renderItem={({ item }) => (
           <CategoryItem title={item.name}>{item.icon}</CategoryItem>
@@ -21,5 +24,3 @@ export const CategoryList = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({});

@@ -1,11 +1,13 @@
 import { View, Text } from "react-native";
-import { SearchBar } from "../../components/searchBar/SearchBar";
-import { FlexView } from "../../components/containers/FlexView";
+
+import { ScreenContainerWithScroll } from "../../components/containers/ScreenContainerWithScroll";
 
 export const SearchScreen = () => {
   return (
-    <FlexView>
-      <SearchBar />
-    </FlexView>
+    <ScreenContainerWithScroll>
+      <View>
+        <Text>Search Screen</Text>
+      </View>
+    </ScreenContainerWithScroll>
   );
 };

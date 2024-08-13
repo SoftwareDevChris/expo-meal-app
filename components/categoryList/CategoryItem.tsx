@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
-import { AppColors } from "../../Constants/Colors";
-import { AppFontSizes, AppSpacing } from "../../Constants/Sizes";
+import { AppColors } from "../../constants/Colors";
+import { AppFontSizes, AppSpacing } from "../../constants/Sizes";
 
 type Props = {
   title: string;
@@ -20,7 +20,6 @@ export const CategoryItem = ({ title, children }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    maxHeight: 70,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -33,6 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.gray_50,
     borderRadius: 50,
 
+    margin: 2,
     elevation: 2,
     shadowColor: "black",
     shadowOpacity: 0.1,
