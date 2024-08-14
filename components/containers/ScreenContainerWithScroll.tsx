@@ -15,7 +15,7 @@ export const ScreenContainerWithScroll = ({ children }: Props) => {
   return (
     <ScrollView style={styles.container}>
       {children}
-      {Platform.OS === "android" && <View style={{ height: 20 }} />}
+      <View style={{ height: Platform.OS === "android" ? 40 : 14 }} />
     </ScrollView>
   );
 };

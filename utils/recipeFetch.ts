@@ -1,6 +1,6 @@
 import { getFavoriteRecipeIdsFromStorage } from "./favoriteStorage";
 
-import { TRecipe } from "../types/recipe";
+import { TApiResponse, TRecipe } from "../types/recipe";
 
 export const getFavoriteRecipes = async () => {
   try {
@@ -74,4 +74,27 @@ export const getRandomRecipes = async (count: number) => {
   }
 
   return tempArray;
+};
+
+export const getRecipesBySearchQuery = async (query: string) => {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch recipes with query: "${query}"`);
+    }
+
+    const data: TApiResponse = await response.json();
+
+    if (!data.meals || data.meals.length === 0) {
+      return null;
+    }
+
+    return data.meals;
+  } catch (error) {
+    console.error(`Error fetching recipes with query: "${query}".`, error);
+    return null;
+  }
 };

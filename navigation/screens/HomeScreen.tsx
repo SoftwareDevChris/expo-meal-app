@@ -28,8 +28,6 @@ export const HomeScreen = ({ navigation, route }: Props) => {
       <SectionTitle title="Discover" />
 
       <DiscoverList />
-
-      <View style={{ height: 20 }} />
     </ScreenContainerWithScroll>
   );
 };

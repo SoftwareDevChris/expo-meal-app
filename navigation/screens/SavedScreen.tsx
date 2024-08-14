@@ -4,10 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import { TRecipe } from "../../types/recipe";
 
 import { ScreenContainerWithScroll } from "../../components/containers/ScreenContainerWithScroll";
-import { SectionTitle } from "../../components/sectionTitle/SectionTitle";
 import { RecipeCardHorizontal } from "../../components/recipeCardHorizontal/RecipeCardHorizontal";
+import { SectionContainer } from "../../components/containers/SectionContainer";
 
-import { AppSpacing } from "../../constants/Sizes";
 import { getFavoriteRecipes } from "../../utils/recipeFetch";
 
 export const SavedScreen = () => {
@@ -28,16 +27,15 @@ export const SavedScreen = () => {
 
   return (
     <ScreenContainerWithScroll>
-      <View style={{ marginTop: AppSpacing.xl }} />
-
-      <SectionTitle title="Favorites" />
-      {favoriteList.length > 0 ? (
-        favoriteList.map((recipe) => (
-          <RecipeCardHorizontal key={recipe.idMeal} recipe={recipe} />
-        ))
-      ) : (
-        <Text>No favorite recipes found.</Text>
-      )}
+      <SectionContainer>
+        {favoriteList.length > 0 ? (
+          favoriteList.map((recipe) => (
+            <RecipeCardHorizontal key={recipe.idMeal} recipe={recipe} />
+          ))
+        ) : (
+          <Text>You have yet to add any favorites</Text>
+        )}
+      </SectionContainer>
     </ScreenContainerWithScroll>
   );
 };
