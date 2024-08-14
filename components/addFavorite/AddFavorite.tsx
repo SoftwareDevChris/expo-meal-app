@@ -27,9 +27,9 @@ export const AddFavorite = ({ recipeId }: Props) => {
     <View>
       {isFavorite ? (
         <Ionicons
-          name="star"
+          name="heart"
           size={24}
-          color="gold"
+          color="red"
           onPress={() => {
             toggleFavoriteRecipeIdInStorage(recipeId);
             setIsFavorite(false);
@@ -37,9 +37,9 @@ export const AddFavorite = ({ recipeId }: Props) => {
         />
       ) : (
         <Ionicons
-          name="star-outline"
+          name="heart-outline"
           size={24}
-          color="gold"
+          color="red"
           onPress={() => {
             toggleFavoriteRecipeIdInStorage(recipeId);
             setIsFavorite(true);

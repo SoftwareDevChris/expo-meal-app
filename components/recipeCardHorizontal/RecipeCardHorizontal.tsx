@@ -6,15 +6,30 @@ import { AppFontSizes, AppRadius, AppSpacing } from "../../constants/Sizes";
 import { AppColors } from "../../constants/Colors";
 
 import { AddFavorite } from "../addFavorite/AddFavorite";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import {
+  StackScreenParamList,
+  StackScreens,
+} from "../../navigation/AppScreens";
 
 type Props = {
   recipe: TRecipe;
 };
 
 export const RecipeCardHorizontal = ({ recipe }: Props) => {
+  const navigation = useNavigation<NavigationProp<StackScreenParamList>>();
+
   return (
-    <Pressable style={styles.container}>
-      <Image source={{ uri: recipe.strMealThumb }} style={styles.image} />
+    <Pressable
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate(StackScreens.RECIPE_DETAILS_SCREEN, { recipe })
+      }
+    >
+      <Image
+        source={{ uri: `${recipe.strMealThumb}/preview` }}
+        style={styles.image}
+      />
 
       <View style={styles.textContainer}>
         <Text style={styles.title}>{recipe.strMeal}</Text>

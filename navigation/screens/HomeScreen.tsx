@@ -1,6 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 
-import { TabScreenProps, TabScreens } from "../AppScreens";
+import {
+  StackScreenProps,
+  StackScreens,
+  TabScreenProps,
+  TabScreens,
+} from "../AppScreens";
 
 import { CategoryList } from "../../components/categoryList/CategoryList";
 
@@ -9,7 +14,7 @@ import { DiscoverList } from "../../components/discoverList/DiscoverList";
 import { ScreenContainerWithScroll } from "../../components/containers/ScreenContainerWithScroll";
 import { SectionTitle } from "../../components/sectionTitle/SectionTitle";
 
-type Props = TabScreenProps<TabScreens.HOME_SCREEN>;
+type Props = StackScreenProps<StackScreens.HOME_SCREEN>;
 
 export const HomeScreen = ({ navigation, route }: Props) => {
   return (
