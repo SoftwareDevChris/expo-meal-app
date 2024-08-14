@@ -10,6 +10,10 @@ import { SectionContainer } from "../../components/containers/SectionContainer";
 import { getFavoriteRecipes } from "../../utils/recipeFetch";
 
 export const SavedScreen = () => {
+  // TODO
+  // Create a store to store to save the id's of favorite recipes.
+  // Add it as a dependency in the useEffect hook for rerendering when a new favorite recipe is added.
+
   const [favoriteList, setFavoriteList] = useState<TRecipe[]>([]);
 
   const getFavorites = useCallback(async () => {
