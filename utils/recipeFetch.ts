@@ -1,42 +1,66 @@
-import { getFavoriteRecipeIdsFromStorage } from "./favoriteStorage";
-
 import { TApiResponse, TRecipe } from "../types/recipe";
 
-export const getFavoriteRecipes = async () => {
+export const getRecipeById = async (id: string) => {
   try {
-    const recipeIdList = await getFavoriteRecipeIdsFromStorage();
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
 
-    if (recipeIdList.length === 0) return [];
+    if (!response.ok) {
+      throw new Error(`Failed to fetch recipe with ID: ${id}`);
+    }
 
+    const data = await response.json();
+
+    if (!data.meals || !data.meals[0]) {
+      throw new Error(`No recipe found for ID: ${id}`);
+    }
+
+    return data.meals[0] as TRecipe;
+  } catch (error) {
+    console.error(`Error fetching recipe with ID ${id}:`, error);
+    return null;
+  }
+};
+
+export const getFavoriteRecipes = async (recipeList: TRecipe[]) => {
+  if (!recipeList || recipeList.length === 0) {
+    return [];
+  }
+
+  try {
     const recipes = await Promise.all(
-      recipeIdList.map(async (id: string) => {
+      recipeList.map(async (recipe) => {
         try {
           const response = await fetch(
-            `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+            `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipe.idMeal}`
           );
 
           if (!response.ok) {
-            throw new Error(`Failed to fetch recipe with ID: ${id}`);
+            throw new Error(`Failed to fetch recipe with ID: ${recipe.idMeal}`);
           }
 
           const data = await response.json();
 
           if (!data.meals || !data.meals[0]) {
-            throw new Error(`No recipe found for ID: ${id}`);
+            throw new Error(`No recipe found for ID: ${recipe.idMeal}`);
           }
 
           return data.meals[0] as TRecipe;
         } catch (error) {
-          console.error(`Error fetching recipe with ID ${id}:`, error);
+          console.error(
+            `Error fetching recipe with ID ${recipe.idMeal}:`,
+            error
+          );
           return null; // Return null for failed fetches
         }
       })
     );
 
-    return recipes;
+    return recipes as TRecipe[];
   } catch (error) {
     console.error("Error fetching favorite recipes:", error);
-    throw new Error("Error fetching favorite recipes");
+    return null;
   }
 };
 

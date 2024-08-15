@@ -29,7 +29,11 @@ export const SearchResultList = () => {
   const setSearchResults = useSearchStore().setSearchResults;
 
   const fetchRecipes = useCallback(async () => {
-    if (!previousSelectedCategory) setCurrentCategory("");
+    if (!previousSelectedCategory) {
+      setCurrentCategory("");
+      setRecipesFromCategoryStore([]);
+      setSearchResults([]);
+    }
 
     // 1. The previous selected category is equal to the current selected category,
     // 2. There are recipes in the category store,
@@ -42,8 +46,8 @@ export const SearchResultList = () => {
       setSearchResults(recipesFromCategoryStore);
 
     // 1. If a category is selected,
-    // 2. The selected category doesn't match the locally selected category,
-    // 3. There's no search query
+    // 2. The previous selected category doesn't match the current selected category,
+    // 3. No search query
     if (
       previousSelectedCategory.length > 0 &&
       previousSelectedCategory !== currentCategory &&
@@ -70,6 +74,7 @@ export const SearchResultList = () => {
         setSearchResults(recipeListWithSearchResults);
     }
 
+    // User is searching without a category selected
     if (!currentCategory && searchQuery) {
       const results = await getRecipesBySearchQuery(searchQuery);
       if (results) setSearchResults(results);
