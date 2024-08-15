@@ -1,11 +1,12 @@
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import React, { useCallback, useEffect } from "react";
 
+import { TRecipe } from "../../types/recipe";
 import { getRandomRecipes } from "../../utils/recipeFetch";
 import { AppSpacing } from "../../constants/Sizes";
-import { TRecipe } from "../../types/recipe";
 
 import { RecipeCardHorizontal } from "../recipeCardHorizontal/RecipeCardHorizontal";
+import { SectionTitle } from "../sectionTitle/SectionTitle";
 
 export const DiscoverList = () => {
   const [recipeList, setRecipeList] = React.useState<TRecipe[]>([]);
@@ -31,6 +32,7 @@ export const DiscoverList = () => {
 
   return (
     <View style={{ gap: AppSpacing.sm, paddingHorizontal: AppSpacing.md - 2 }}>
+      <SectionTitle title="Discover" />
       {recipeList.map((recipe) => (
         <RecipeCardHorizontal key={recipe.idMeal} recipe={recipe} />
       ))}

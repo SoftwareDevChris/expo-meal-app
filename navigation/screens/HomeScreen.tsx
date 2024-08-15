@@ -1,18 +1,13 @@
 import { View, Text, StyleSheet, Platform } from "react-native";
 
-import {
-  StackScreenProps,
-  StackScreens,
-  TabScreenProps,
-  TabScreens,
-} from "../AppScreens";
+import { StackScreenProps, StackScreens } from "../AppScreens";
 
-import { CategoryList } from "../../components/categoryList/CategoryList";
+import { CategorySelectList } from "../../components/categorySelectList/CategorySelectList";
 
 import { AppSpacing, AppFontSizes } from "../../constants/Sizes";
 import { DiscoverList } from "../../components/discoverList/DiscoverList";
 import { ScreenContainerWithScroll } from "../../components/containers/ScreenContainerWithScroll";
-import { SectionTitle } from "../../components/sectionTitle/SectionTitle";
+import { CategoryRecipeList } from "../../components/categoryRecipeList/CategoryRecipeList";
 
 type Props = StackScreenProps<StackScreens.HOME_SCREEN>;
 
@@ -28,9 +23,9 @@ export const HomeScreen = ({ navigation, route }: Props) => {
       </View> */}
 
       <View style={{ marginTop: AppSpacing.xl }} />
-      <CategoryList />
+      <CategorySelectList />
 
-      <SectionTitle title="Discover" />
+      <CategoryRecipeList />
 
       <DiscoverList />
     </ScreenContainerWithScroll>

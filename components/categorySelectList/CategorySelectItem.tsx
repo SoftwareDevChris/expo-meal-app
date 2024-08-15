@@ -3,16 +3,34 @@ import { ReactNode } from "react";
 
 import { AppColors } from "../../constants/Colors";
 import { AppFontSizes, AppSpacing } from "../../constants/Sizes";
+import { useCategoryStore } from "../../store/categoryStore";
 
 type Props = {
   title: string;
   children: ReactNode;
 };
 
-export const CategoryItem = ({ title, children }: Props) => {
+export const CategorySelectItem = ({ title, children }: Props) => {
+  const selectedCategory = useCategoryStore().selectedCategory;
+  const setSelectedCategory = useCategoryStore().setSelectedCategory;
+
+  const isSelected = selectedCategory === title;
+
+  const handleCategoryPress = () => {
+    setSelectedCategory(isSelected ? "" : title);
+  };
+
   return (
     <View style={styles.container}>
-      <Pressable style={styles.chip}>{children}</Pressable>
+      <Pressable
+        style={[
+          styles.chip,
+          { backgroundColor: isSelected ? "green" : AppColors.gray_50 },
+        ]}
+        onPress={handleCategoryPress}
+      >
+        {children}
+      </Pressable>
       <Text style={styles.text}>{title}</Text>
     </View>
   );
@@ -29,7 +47,6 @@ const styles = StyleSheet.create({
 
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: AppColors.gray_50,
     borderRadius: 50,
 
     margin: 2,

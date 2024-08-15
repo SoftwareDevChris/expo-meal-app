@@ -98,3 +98,26 @@ export const getRecipesBySearchQuery = async (query: string) => {
     return null;
   }
 };
+
+export const getRecipesInCategory = async (category: string) => {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch recipes in category: "${category}"`);
+    }
+
+    const data: TApiResponse = await response.json();
+
+    if (!data.meals || data.meals.length === 0) {
+      return null;
+    }
+
+    return data.meals;
+  } catch (error) {
+    console.error(`Error fetching recipes in category: "${category}".`, error);
+    return null;
+  }
+};

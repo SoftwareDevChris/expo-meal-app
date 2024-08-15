@@ -1,12 +1,12 @@
 import { FlatList } from "react-native";
 
-import { CategoryItem } from "./CategoryItem";
+import { CategorySelectItem } from "./CategorySelectItem";
 
 import { AppSpacing } from "../../constants/Sizes";
 
-import { CATEGORY_DATA } from "./categoryData";
+import { CATEGORY_SELECT_DATA } from "./categorySelectData";
 
-export const CategoryList = () => {
+export const CategorySelectList = () => {
   return (
     <>
       <FlatList
@@ -16,9 +16,9 @@ export const CategoryList = () => {
           gap: AppSpacing.md,
           paddingHorizontal: AppSpacing.md - 2,
         }}
-        data={CATEGORY_DATA}
+        data={CATEGORY_SELECT_DATA}
         renderItem={({ item }) => (
-          <CategoryItem title={item.name}>{item.icon}</CategoryItem>
+          <CategorySelectItem title={item.name}>{item.icon}</CategorySelectItem>
         )}
       />
     </>

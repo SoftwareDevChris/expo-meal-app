@@ -14,7 +14,7 @@ import BreakfastIcon from "../../assets/icons/breakfastIcon.svg";
 
 const iconSize = 32;
 
-export const CATEGORY_DATA = [
+export const CATEGORY_SELECT_DATA = [
   {
     id: "1",
     name: "Beef",
