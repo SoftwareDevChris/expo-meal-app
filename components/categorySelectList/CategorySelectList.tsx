@@ -6,6 +6,10 @@ import { AppSpacing } from "../../constants/Sizes";
 
 import { CATEGORY_SELECT_DATA } from "./categorySelectData";
 
+// TODO:
+// Fetch categories from the API and assign an icon to each.
+// Replace the hard-coded categories
+
 export const CategorySelectList = () => {
   return (
     <>

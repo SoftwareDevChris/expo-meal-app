@@ -18,7 +18,7 @@ export const SearchBar = () => {
       </View>
       <TextInput
         style={styles.input}
-        placeholder="Chicken tiki masala"
+        placeholder="Search..."
         placeholderTextColor={AppColors.gray_400}
         value={searchQuery}
         onChangeText={(txt) => setSearchQuery(txt)}

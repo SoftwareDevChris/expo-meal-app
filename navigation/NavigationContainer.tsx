@@ -27,11 +27,12 @@ const Stack = createNativeStackNavigator<StackScreenParamList>();
 // ** TABS ** //
 const HomeStack = () => {
   return (
-    <Stack.Navigator
-      initialRouteName={StackScreens.HOME_SCREEN}
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name={StackScreens.HOME_SCREEN} component={HomeScreen} />
+    <Stack.Navigator initialRouteName={StackScreens.HOME_SCREEN}>
+      <Stack.Screen
+        name={StackScreens.HOME_SCREEN}
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name={StackScreens.RECIPE_DETAILS_SCREEN}
         component={RecipeDetailsScreen}
@@ -42,13 +43,11 @@ const HomeStack = () => {
 
 const SearchStack = () => {
   return (
-    <Stack.Navigator
-      initialRouteName={StackScreens.SEARCH_SCREEN}
-      screenOptions={{ headerShown: false }}
-    >
+    <Stack.Navigator initialRouteName={StackScreens.SEARCH_SCREEN}>
       <Stack.Screen
         name={StackScreens.SEARCH_SCREEN}
         component={SearchScreen}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={StackScreens.RECIPE_DETAILS_SCREEN}
@@ -60,11 +59,12 @@ const SearchStack = () => {
 
 const SavedStack = () => {
   return (
-    <Stack.Navigator
-      initialRouteName={StackScreens.SAVED_SCREEN}
-      screenOptions={{ headerShown: false }}
-    >
-      <Stack.Screen name={StackScreens.SAVED_SCREEN} component={SavedScreen} />
+    <Stack.Navigator initialRouteName={StackScreens.SAVED_SCREEN}>
+      <Stack.Screen
+        name={StackScreens.SAVED_SCREEN}
+        component={SavedScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name={StackScreens.RECIPE_DETAILS_SCREEN}
         component={RecipeDetailsScreen}

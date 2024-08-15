@@ -1,5 +1,6 @@
-import { RecipeDetails } from "../../components/recipeDetails/RecipeDetails";
 import { StackScreenProps, StackScreens } from "../AppScreens";
+
+import { RecipeDetails } from "../../components/recipeDetails/RecipeDetails";
 
 type Props = StackScreenProps<StackScreens.RECIPE_DETAILS_SCREEN>;
 
