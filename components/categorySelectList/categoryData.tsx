@@ -38,7 +38,6 @@ export const getCategoryData = async () => {
         icon = <LambIcon width={iconSize} height={iconSize} />;
         break;
       case "Miscellaneous":
-        category.strCategory = "Misc";
         icon = <MiscIcon width={iconSize} height={iconSize} />;
         break;
       case "Pasta":

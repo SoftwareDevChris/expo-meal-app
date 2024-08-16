@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "30%",
-    aspectRatio: 4 / 3,
+    height: "100%",
+    minHeight: 75,
     borderRadius: AppRadius.xs,
     objectFit: "cover",
   },

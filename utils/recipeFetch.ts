@@ -68,10 +68,10 @@ export const getFavoriteRecipes = async (recipeList: TRecipe[]) => {
   }
 };
 
-export const getRandomRecipe = async () => {
+export const getMultipleRandomRecipes = async (count: number) => {
   try {
     const response = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/random.php"
+      `https://www.themealdb.com/api/json/v2/${process.env.EXPO_PUBLIC_API_KEY}/randomselection.php`
     );
 
     if (!response.ok) {
@@ -84,24 +84,11 @@ export const getRandomRecipe = async () => {
       throw new Error(`No random recipe found`);
     }
 
-    return data.meals[0] as TRecipe;
+    return data.meals as TRecipe[];
   } catch (error) {
     console.error(`Error fetching random recipe:`, error);
     return null;
   }
-};
-
-export const getMultipleRandomRecipes = async (count: number) => {
-  let tempArray: TRecipe[] = [];
-
-  for (let i = 0; i < count; i++) {
-    const recipe = await getRandomRecipe();
-
-    if (!recipe || tempArray.includes(recipe)) getRandomRecipe();
-    else tempArray.push(recipe);
-  }
-
-  return tempArray;
 };
 
 export const getRecipesBySearchQuery = async (query: string) => {

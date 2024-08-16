@@ -4,6 +4,7 @@ import { TRecipe } from "../../types/recipe";
 
 import { AppFontSizes, AppSpacing } from "../../constants/Sizes";
 import { AppColors } from "../../constants/Colors";
+import { AppFonts } from "../../constants/Fonts";
 
 type Props = {
   recipe: TRecipe;
@@ -11,17 +12,17 @@ type Props = {
 
 export const RecipeDetails = ({ recipe }: Props) => {
   return (
-    <View>
+    <>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: recipe.strMealThumb }} />
       </View>
 
       <ScrollView style={styles.recipeContainer}>
         <Text style={styles.title}>{recipe.strMeal}</Text>
-        <Text style={styles.area}>{recipe.strArea}</Text>
+        {recipe.strArea && <Text style={styles.area}>{recipe.strArea}</Text>}
         {/* <Text style={styles.description}>{recipe.strInstructions}</Text> */}
       </ScrollView>
-    </View>
+    </>
   );
 };
 
@@ -32,11 +33,11 @@ const styles = StyleSheet.create({
     aspectRatio: 4 / 3,
   },
   recipeContainer: {
-    padding: AppSpacing.xl,
+    padding: AppSpacing.lg,
   },
   title: {
     fontSize: AppFontSizes.xxl,
-    fontWeight: "bold",
+    fontFamily: AppFonts.PoppinsSemiBold,
   },
   area: {
     color: AppColors.gray_500,

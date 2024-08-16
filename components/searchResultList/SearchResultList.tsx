@@ -98,7 +98,9 @@ export const SearchResultList = () => {
   if (searchResults.length < 1 && !searchQuery && !previousSelectedCategory)
     return (
       <SectionContainer>
-        <Text style={{ textAlign: "center" }}>Search for a recipe name</Text>
+        <Text style={{ textAlign: "center" }}>
+          Select a category or search for a recipe
+        </Text>
       </SectionContainer>
     );
 

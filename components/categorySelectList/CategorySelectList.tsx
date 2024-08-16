@@ -30,8 +30,8 @@ export const CategorySelectList = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
-          gap: AppSpacing.md,
-          paddingHorizontal: AppSpacing.md - 2,
+          gap: AppSpacing.xl,
+          paddingHorizontal: AppSpacing.md,
         }}
         data={categories}
         renderItem={({ item }) => (

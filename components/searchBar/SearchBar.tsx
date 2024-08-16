@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     borderRadius: AppRadius.xl,
+
+    elevation: 2,
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 1 },
   },
   iconContainer: {
     width: "10%",

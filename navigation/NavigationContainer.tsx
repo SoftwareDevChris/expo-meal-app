@@ -20,6 +20,7 @@ import { AppColors } from "../constants/Colors";
 import { AppSpacing } from "../constants/Sizes";
 
 import { Ionicons } from "@expo/vector-icons";
+import { TabScreenHeader } from "../components/headers/TabScreenHeader";
 
 const Tab = createBottomTabNavigator<TabScreenParamList>();
 const Stack = createNativeStackNavigator<StackScreenParamList>();
@@ -31,7 +32,11 @@ const HomeStack = () => {
       <Stack.Screen
         name={StackScreens.HOME_SCREEN}
         component={HomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          header: () => (
+            <TabScreenHeader withHomeIcon title="World of recipes" />
+          ),
+        }}
       />
       <Stack.Screen
         name={StackScreens.RECIPE_DETAILS_SCREEN}
@@ -47,7 +52,9 @@ const SearchStack = () => {
       <Stack.Screen
         name={StackScreens.SEARCH_SCREEN}
         component={SearchScreen}
-        options={{ headerShown: false }}
+        options={{
+          header: () => <TabScreenHeader title="Search" />,
+        }}
       />
       <Stack.Screen
         name={StackScreens.RECIPE_DETAILS_SCREEN}
@@ -63,7 +70,9 @@ const SavedStack = () => {
       <Stack.Screen
         name={StackScreens.SAVED_SCREEN}
         component={SavedScreen}
-        options={{ headerShown: false }}
+        options={{
+          header: () => <TabScreenHeader title="Favorites" />,
+        }}
       />
       <Stack.Screen
         name={StackScreens.RECIPE_DETAILS_SCREEN}
@@ -75,6 +84,7 @@ const SavedStack = () => {
 
 const Tabs = () => {
   const bottomTabBarAndroidHeight = 60;
+  const activeTabColor = AppColors.green_800;
 
   return (
     <Tab.Navigator
@@ -97,7 +107,7 @@ const Tabs = () => {
               <Ionicons
                 name="home-sharp"
                 size={25}
-                color={focused ? "red" : AppColors.gray_700}
+                color={focused ? activeTabColor : AppColors.gray_700}
               />
             ) : (
               <Ionicons
@@ -116,7 +126,7 @@ const Tabs = () => {
           tabBarLabelStyle: { marginBottom: AppSpacing.sm },
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Ionicons name="search" size={25} color="skyblue" />
+              <Ionicons name="search" size={25} color={activeTabColor} />
             ) : (
               <Ionicons
                 name="search-outline"
@@ -134,7 +144,7 @@ const Tabs = () => {
           tabBarLabelStyle: { marginBottom: AppSpacing.sm },
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Ionicons name="bookmark" size={25} color="gold" />
+              <Ionicons name="bookmark" size={25} color={activeTabColor} />
             ) : (
               <Ionicons
                 name="bookmark-outline"

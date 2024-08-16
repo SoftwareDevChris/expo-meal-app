@@ -13,8 +13,8 @@ export const DiscoverList = () => {
   const recipeAmount = 5;
 
   const getRecipes = useCallback(async () => {
-    const recipes: TRecipe[] = await getMultipleRandomRecipes(recipeAmount);
-    setRecipeList(recipes);
+    const recipes = await getMultipleRandomRecipes(recipeAmount);
+    if (recipes) setRecipeList(recipes);
   }, []);
 
   useEffect(() => {

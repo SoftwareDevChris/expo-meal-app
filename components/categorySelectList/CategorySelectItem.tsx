@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { AppColors } from "../../constants/Colors";
 import { AppFontSizes, AppSpacing } from "../../constants/Sizes";
 import { useCategoryStore } from "../../store/categoryStore";
+import { AppFonts } from "../../constants/Fonts";
 
 type Props = {
   title: string;
@@ -16,6 +17,9 @@ export const CategorySelectItem = ({ title, children }: Props) => {
 
   const isSelected = selectedCategory === title;
 
+  // Override miscellaneous category to display "Misc"
+  title === "Miscellaneous" ? (title = "Misc") : title;
+
   const handleCategoryPress = () => {
     setSelectedCategory(isSelected ? "" : title);
   };
@@ -25,7 +29,11 @@ export const CategorySelectItem = ({ title, children }: Props) => {
       <Pressable
         style={[
           styles.chip,
-          { backgroundColor: isSelected ? "green" : AppColors.gray_50 },
+          {
+            backgroundColor: isSelected
+              ? AppColors.green_800
+              : AppColors.gray_50,
+          },
         ]}
         onPress={handleCategoryPress}
       >
@@ -42,12 +50,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   chip: {
-    height: 50,
-    width: 50,
+    height: 54,
+    width: 54,
 
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 50,
+    borderRadius: 54,
 
     margin: 2,
     elevation: 2,
@@ -57,7 +65,8 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    fontSize: AppFontSizes.md,
+    fontSize: AppFontSizes.sm,
+    fontFamily: AppFonts.PoppinsRegular,
     marginTop: AppSpacing.sm,
   },
 });
