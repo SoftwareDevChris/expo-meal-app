@@ -10,9 +10,6 @@ type Props = {
   recipeId: string;
 };
 
-// TODO:
-// Fix the bug where the icon doesn't update on a recipe card when favorite status changes
-
 export const AddFavorite = ({ recipeId }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -40,6 +37,7 @@ export const AddFavorite = ({ recipeId }: Props) => {
       (recipe) => recipe.idMeal === recipeId
     );
     if (checkIfFavorite) setIsFavorite(true);
+    else setIsFavorite(false);
   }, [favoriteRecipes]);
 
   useEffect(() => {
