@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { AppFontSizes, AppSpacing } from "../../constants/Sizes";
+import { AppColors } from "../../constants/Colors";
 
 type Props = {
   title: string;
@@ -8,7 +9,7 @@ type Props = {
 
 export const SectionTitle = ({ title }: Props) => {
   return (
-    <View style={{ paddingHorizontal: AppSpacing.md }}>
+    <View>
       <Text style={styles.sectionTitle}>{title}</Text>
     </View>
   );
@@ -17,8 +18,9 @@ export const SectionTitle = ({ title }: Props) => {
 const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: AppFontSizes.lg,
+    textTransform: "uppercase",
     fontWeight: "bold",
-    marginTop: AppSpacing.xl,
-    marginBottom: AppSpacing.md,
+    color: AppColors.gray_400,
+    letterSpacing: 0.5,
   },
 });

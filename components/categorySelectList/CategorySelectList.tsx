@@ -1,16 +1,29 @@
 import { FlatList } from "react-native";
+import { useCallback, useEffect } from "react";
+
+import { useCategoryStore } from "../../store/categoryStore";
+
+import { getCategoryData } from "./categoryData";
 
 import { CategorySelectItem } from "./CategorySelectItem";
 
 import { AppSpacing } from "../../constants/Sizes";
 
-import { CATEGORY_SELECT_DATA } from "./categorySelectData";
-
-// TODO:
-// Fetch categories from the API and assign an icon to each.
-// Replace the hard-coded categories
-
 export const CategorySelectList = () => {
+  const categories = useCategoryStore().categoryOptionList;
+  const setCategories = useCategoryStore().setCategoryOptionList;
+
+  const getCategories = useCallback(async () => {
+    const data = await getCategoryData();
+    if (data) setCategories(data);
+  }, []);
+
+  useEffect(() => {
+    if (categories.length < 1) getCategories();
+  }, []);
+
+  if (categories.length < 1) return null;
+
   return (
     <>
       <FlatList
@@ -20,9 +33,11 @@ export const CategorySelectList = () => {
           gap: AppSpacing.md,
           paddingHorizontal: AppSpacing.md - 2,
         }}
-        data={CATEGORY_SELECT_DATA}
+        data={categories}
         renderItem={({ item }) => (
-          <CategorySelectItem title={item.name}>{item.icon}</CategorySelectItem>
+          <CategorySelectItem key={item.idCategory} title={item.strCategory}>
+            {item.icon}
+          </CategorySelectItem>
         )}
       />
     </>

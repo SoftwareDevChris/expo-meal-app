@@ -6,6 +6,7 @@ import {
   View,
 } from "react-native";
 import { ReactNode } from "react";
+import { AppSpacing } from "../../constants/Sizes";
 
 type Props = {
   children: ReactNode | ReactNode[];
@@ -23,7 +24,8 @@ export const ScreenContainerWithScroll = ({ children }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    paddingTop:
+      Platform.OS === "android" ? StatusBar.currentHeight : AppSpacing.md,
     paddingBottom: 20,
   },
 });

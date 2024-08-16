@@ -1,5 +1,11 @@
-export type TApiResponse = {
-  meals: TRecipe[];
+import { ReactNode } from "react";
+
+export type TCategory = {
+  idCategory: string;
+  strCategory: string;
+  strCategoryThumb: string;
+  strCategoryDescription: string;
+  icon?: ReactNode;
 };
 
 export type TRecipe = {
@@ -54,4 +60,12 @@ export type TRecipe = {
   strSource: string;
   strImageSource: string;
   dateModified: string;
+};
+
+export type TRecipeApiResponse = {
+  meals: TRecipe[];
+};
+
+export type TCategoryApiResponse = {
+  categories: TCategory[];
 };

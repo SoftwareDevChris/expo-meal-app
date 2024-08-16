@@ -1,4 +1,8 @@
-import { TApiResponse, TRecipe } from "../types/recipe";
+import {
+  TRecipeApiResponse,
+  TRecipe,
+  TCategoryApiResponse,
+} from "../types/recipe";
 
 export const getRecipeById = async (id: string) => {
   try {
@@ -87,7 +91,7 @@ export const getRandomRecipe = async () => {
   }
 };
 
-export const getRandomRecipes = async (count: number) => {
+export const getMultipleRandomRecipes = async (count: number) => {
   let tempArray: TRecipe[] = [];
 
   for (let i = 0; i < count; i++) {
@@ -110,7 +114,7 @@ export const getRecipesBySearchQuery = async (query: string) => {
       throw new Error(`Failed to fetch recipes with query: "${query}"`);
     }
 
-    const data: TApiResponse = await response.json();
+    const data: TRecipeApiResponse = await response.json();
 
     if (!data.meals || data.meals.length === 0) {
       return null;
@@ -133,7 +137,7 @@ export const getRecipesInCategory = async (category: string) => {
       throw new Error(`Failed to fetch recipes in category: "${category}"`);
     }
 
-    const data: TApiResponse = await response.json();
+    const data: TRecipeApiResponse = await response.json();
 
     if (!data.meals || data.meals.length === 0) {
       return null;
@@ -142,6 +146,52 @@ export const getRecipesInCategory = async (category: string) => {
     return data.meals;
   } catch (error) {
     console.error(`Error fetching recipes in category: "${category}".`, error);
+    return null;
+  }
+};
+
+export const getLatestRecipes = async () => {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v2/${process.env.EXPO_PUBLIC_API_KEY}/latest.php`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch recipes in the latest recipes"`);
+    }
+
+    const data: TRecipeApiResponse = await response.json();
+
+    if (!data.meals || data.meals.length === 0) {
+      return null;
+    }
+
+    return data.meals;
+  } catch (error) {
+    console.error(`Error fetching the latest recipes".`, error);
+    return null;
+  }
+};
+
+export const getCategoriesFromApi = async () => {
+  try {
+    const response = await fetch(
+      "https://www.themealdb.com/api/json/v1/1/categories.php"
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch categories`);
+    }
+
+    const data: TCategoryApiResponse = await response.json();
+
+    if (!data.categories || data.categories.length === 0) {
+      return null;
+    }
+
+    return data.categories;
+  } catch (error) {
+    console.error(`Error fetching categories:`, error);
     return null;
   }
 };
