@@ -6,8 +6,8 @@ import { useCategoryStore } from "../../store/categoryStore";
 import { AppFontSizes, AppSpacing } from "../../constants/Sizes";
 import { getRecipesInCategory } from "../../utils/recipeFetch";
 
-import { RecipeCardHorizontal } from "../recipeCardHorizontal/RecipeCardHorizontal";
-import { SectionTitle } from "../sectionTitle/SectionTitle";
+import { RecipeCardHorizontal } from "../cards/RecipeCardHorizontal";
+import { SectionTitle } from "../titles/SectionTitle";
 
 export const CategoryRecipeList = () => {
   const selectedCategory = useCategoryStore().selectedCategory;

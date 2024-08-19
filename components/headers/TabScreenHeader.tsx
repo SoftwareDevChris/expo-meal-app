@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Platform,
   SafeAreaView,
   StatusBar,
@@ -7,13 +8,12 @@ import {
   View,
 } from "react-native";
 
+import { useIsTablet } from "../../hooks/useIsTablet";
+
 import HeaderIcon from "../../assets/icons/cookingIcon.svg";
+
 import { AppFontSizes, AppSpacing } from "../../constants/Sizes";
 import { AppFonts } from "../../constants/Fonts";
-
-const androidStatusBarHeight = StatusBar.currentHeight
-  ? StatusBar.currentHeight
-  : AppSpacing.xxl;
 
 type Props = {
   title: string;
@@ -21,11 +21,42 @@ type Props = {
 };
 
 export const TabScreenHeader = ({ title, withHomeIcon }: Props) => {
-  const iconSize = 20;
+  const androidStatusBarHeight = StatusBar.currentHeight
+    ? StatusBar.currentHeight
+    : AppSpacing.xxl;
+
+  const { isTablet } = useIsTablet();
+  const screenHeight: number = Dimensions.get("screen").height;
+
+  const iconSize = 24;
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          paddingTop:
+            Platform.OS === "android"
+              ? androidStatusBarHeight + AppSpacing.md
+              : isTablet
+              ? screenHeight * 0.05
+              : screenHeight * 0.065,
+        },
+      ]}
+    >
       {withHomeIcon && <HeaderIcon width={iconSize} height={iconSize} />}
-      <Text style={styles.title}>{title}</Text>
+      <Text
+        style={[
+          styles.title,
+          {
+            fontSize: isTablet
+              ? AppFontSizes.tablet_lg
+              : AppFontSizes.mobile_lg,
+          },
+        ]}
+      >
+        {title}
+      </Text>
     </View>
   );
 };
@@ -44,14 +75,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
 
     paddingVertical: AppSpacing.lg,
-    paddingTop:
-      Platform.OS === "android"
-        ? androidStatusBarHeight + 16
-        : AppSpacing.xxl + 16,
     backgroundColor: "white",
   },
   title: {
-    fontSize: AppFontSizes.xl,
     fontFamily: AppFonts.InterLight,
     textTransform: "uppercase",
     marginLeft: AppSpacing.md,

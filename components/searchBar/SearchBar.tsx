@@ -14,7 +14,7 @@ export const SearchBar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
-        <Ionicons name="search" size={AppFontSizes.xxl} color="gray" />
+        <Ionicons name="search" size={AppFontSizes.mobile_xxl} color="gray" />
       </View>
       <TextInput
         style={styles.input}
@@ -39,21 +39,15 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
   },
   iconContainer: {
-    width: "10%",
+    width: 40,
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: AppSpacing.md,
-
-    // borderWidth: 1,
-    // borderColor: "red",
   },
   input: {
     width: "90%",
-    fontSize: AppFontSizes.lg,
+    fontSize: AppFontSizes.mobile_lg,
     paddingVertical: AppSpacing.md,
     paddingHorizontal: AppSpacing.md,
-
-    // borderWidth: 1,
-    // borderColor: "blue",
   },
 });

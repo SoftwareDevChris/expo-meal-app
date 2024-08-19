@@ -1,16 +1,20 @@
 import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 
-import { TRecipe } from "../../types/recipe";
-
-import { AppFontSizes, AppRadius, AppSpacing } from "../../constants/Sizes";
-import { AppColors } from "../../constants/Colors";
-
-import { AddFavorite } from "../addFavorite/AddFavorite";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import {
   StackScreenParamList,
   StackScreens,
 } from "../../navigation/AppScreens";
+
+import { TRecipe } from "../../types/recipe";
+
+import { useIsTablet } from "../../hooks/useIsTablet";
+
+import { AddFavorite } from "../addFavorite/AddFavorite";
+
+import { AppFontSizes, AppRadius, AppSpacing } from "../../constants/Sizes";
+import { AppColors } from "../../constants/Colors";
+import { AppFonts } from "../../constants/Fonts";
 
 type Props = {
   recipe: TRecipe;
@@ -19,21 +23,42 @@ type Props = {
 export const RecipeCardHorizontal = ({ recipe }: Props) => {
   const navigation = useNavigation<NavigationProp<StackScreenParamList>>();
 
+  const { isTablet } = useIsTablet();
+
   return (
     <Pressable
-      style={styles.container}
+      style={[styles.container, { minHeight: isTablet ? 160 : 100 }]}
       onPress={() =>
         navigation.navigate(StackScreens.RECIPE_DETAILS_SCREEN, { recipe })
       }
     >
-      <Image
-        source={{ uri: `${recipe.strMealThumb}/preview` }}
-        style={styles.image}
-      />
+      <Image source={{ uri: `${recipe.strMealThumb}` }} style={styles.image} />
 
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{recipe.strMeal}</Text>
-        <Text style={styles.area}>{recipe.strArea}</Text>
+        <Text
+          style={[
+            styles.title,
+            {
+              fontSize: isTablet
+                ? AppFontSizes.tablet_lg
+                : AppFontSizes.mobile_lg,
+            },
+          ]}
+        >
+          {recipe.strMeal}
+        </Text>
+        <Text
+          style={[
+            styles.area,
+            {
+              fontSize: isTablet
+                ? AppFontSizes.tablet_sm
+                : AppFontSizes.mobile_sm,
+            },
+          ]}
+        >
+          {recipe.strArea}
+        </Text>
       </View>
 
       <View>
@@ -60,7 +85,6 @@ const styles = StyleSheet.create({
   image: {
     width: "30%",
     height: "100%",
-    minHeight: 75,
     borderRadius: AppRadius.xs,
     objectFit: "cover",
   },
@@ -69,12 +93,9 @@ const styles = StyleSheet.create({
     width: "60%",
   },
   title: {
-    fontSize: AppFontSizes.lg,
-    fontWeight: "bold",
+    fontFamily: AppFonts.PoppinsBold,
   },
   area: {
-    fontSize: AppFontSizes.sm,
     color: AppColors.gray_600,
-    marginTop: AppSpacing.xs,
   },
 });

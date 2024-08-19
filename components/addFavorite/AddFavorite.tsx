@@ -5,6 +5,7 @@ import { useFavoriteStore } from "../../store/favoriteStore";
 import { toggleFavoriteRecipesInStorage } from "../../utils/favoriteStorage";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useIsTablet } from "../../hooks/useIsTablet";
 
 type Props = {
   recipeId: string;
@@ -16,6 +17,9 @@ export const AddFavorite = ({ recipeId }: Props) => {
   const favoriteRecipes = useFavoriteStore().favorites;
   const addRecipeToStore = useFavoriteStore().addRecipeToFavorites;
   const removeRecipeFromStore = useFavoriteStore().removeRecipeFromFavorites;
+
+  const { isTablet } = useIsTablet();
+  const iconSize = isTablet ? 32 : 24;
 
   const addToFavorites = async () => {
     const newRecipe = await toggleFavoriteRecipesInStorage(recipeId);
@@ -49,14 +53,14 @@ export const AddFavorite = ({ recipeId }: Props) => {
       {isFavorite ? (
         <Ionicons
           name="heart"
-          size={24}
+          size={iconSize}
           color="red"
           onPress={removeFromFavorites}
         />
       ) : (
         <Ionicons
           name="heart-outline"
-          size={24}
+          size={iconSize}
           color="red"
           onPress={addToFavorites}
         />

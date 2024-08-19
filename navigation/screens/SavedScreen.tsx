@@ -1,15 +1,18 @@
-import { Dimensions, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+
+import { useIsTablet } from "../../hooks/useIsTablet";
 
 import { useFavoriteStore } from "../../store/favoriteStore";
 
 import { AppSpacing } from "../../constants/Sizes";
 
 import { ScreenContainerWithScroll } from "../../components/containers/ScreenContainerWithScroll";
-import { RecipeCardHorizontal } from "../../components/recipeCardHorizontal/RecipeCardHorizontal";
+import { RecipeCardHorizontal } from "../../components/cards/RecipeCardHorizontal";
 import { SectionContainer } from "../../components/containers/SectionContainer";
-import { SectionTitle } from "../../components/sectionTitle/SectionTitle";
 
 const NotFound = () => {
+  const { isTablet } = useIsTablet();
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <View>
@@ -17,8 +20,8 @@ const NotFound = () => {
           source={require("../../assets/notfound.png")}
           style={{
             objectFit: "cover",
-            height: Dimensions.get("screen").height * 0.35,
-            width: Dimensions.get("screen").width,
+            height: isTablet ? 500 : 300,
+            width: isTablet ? 500 : 300,
             alignSelf: "center",
           }}
         />
@@ -39,7 +42,6 @@ export const SavedScreen = () => {
     <ScreenContainerWithScroll>
       <SectionContainer>
         <View style={{ gap: AppSpacing.sm }}>
-          <SectionTitle title="My favorites" />
           {favoriteRecipes.map((recipe) => (
             <RecipeCardHorizontal key={recipe.idMeal} recipe={recipe} />
           ))}

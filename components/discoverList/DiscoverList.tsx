@@ -5,8 +5,8 @@ import { TRecipe } from "../../types/recipe";
 import { getMultipleRandomRecipes } from "../../utils/recipeFetch";
 import { AppSpacing } from "../../constants/Sizes";
 
-import { RecipeCardHorizontal } from "../recipeCardHorizontal/RecipeCardHorizontal";
-import { SectionTitle } from "../sectionTitle/SectionTitle";
+import { RecipeCardHorizontal } from "../cards/RecipeCardHorizontal";
+import { SectionTitle } from "../titles/SectionTitle";
 
 export const DiscoverList = () => {
   const [recipeList, setRecipeList] = React.useState<TRecipe[]>([]);

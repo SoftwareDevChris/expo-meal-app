@@ -11,7 +11,7 @@ import {
 import { AppSpacing } from "../../constants/Sizes";
 
 import { SectionContainer } from "../containers/SectionContainer";
-import { RecipeCardHorizontal } from "../recipeCardHorizontal/RecipeCardHorizontal";
+import { RecipeCardHorizontal } from "../cards/RecipeCardHorizontal";
 import { searchRecipesInCategory } from "../../utils/search";
 
 // TODO:

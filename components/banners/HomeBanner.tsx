@@ -2,18 +2,30 @@ import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import { AppFontSizes, AppRadius, AppSpacing } from "../../constants/Sizes";
 import { AppFonts } from "../../constants/Fonts";
 import { AppColors } from "../../constants/Colors";
+import { useIsTablet } from "../../hooks/useIsTablet";
 
 export const HomeBanner = () => {
+  const { isTablet } = useIsTablet();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { height: isTablet ? 300 : 160 }]}>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>
+        <Text
+          style={[
+            styles.text,
+            {
+              fontSize: isTablet
+                ? AppFontSizes.tablet_xxxl
+                : AppFontSizes.mobile_lg,
+            },
+          ]}
+        >
           Browse through hundreds of recipes and find your next favorite dish!
         </Text>
       </View>
 
       <Image
-        style={styles.image}
+        style={[styles.image, { width: isTablet ? 360 : 160 }]}
         source={require("../../assets/female-cooking.png")}
       />
     </View>
@@ -22,30 +34,26 @@ export const HomeBanner = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: "100%",
-    height: 160,
 
     flexDirection: "row",
     justifyContent: "space-between",
 
-    backgroundColor: AppColors.green_800,
+    paddingHorizontal: AppSpacing.lg,
+    backgroundColor: AppColors.green_700,
     borderRadius: AppRadius.md,
     overflow: "hidden",
   },
   textContainer: {
     width: "60%",
-    padding: AppSpacing.lg,
     justifyContent: "center",
   },
   text: {
     color: "white",
-    fontSize: AppFontSizes.lg,
-    fontFamily: AppFonts.PoppinsRegular,
-    lineHeight: AppSpacing.xl,
+    fontFamily: AppFonts.PoppinsMedium,
   },
   image: {
-    width: Dimensions.get("screen").width / 2.4,
-
     objectFit: "contain",
     alignSelf: "center",
   },
